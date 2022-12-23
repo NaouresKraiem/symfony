@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+   
+  <h2>Liste des Candidats | <small>
+   <a href="{{ path('ajout_job') }}">Ajouter</a> </small></h2>
+    {% for msg in app.flashes('notice') %}
+        {{ msg }}
+    {% endfor %}
+   <table class="table table-hover table-striped" border="1">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Type</th>
+      <th>company</th>
+      <th>Date expiration</th>
+      <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for emp in lesJobs %}
+      <tr>
+        <td>{{ emp.id }}</td>
+        <td>{{ emp.type | upper}} </td>
+        <td>{{ emp.getExpiresAt() | date('d/m/yy')}} </td>
+        <td>{{ emp.description }}</td>
+        <td>
+          <a class="btn btn-primary" href="#">voir</a>
+          <a class="btn btn-info" href="#">Modifier</a>
+           <a class="btn btn-danger">Supprimer</a>
+        </td>
+      </tr>
+  
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
